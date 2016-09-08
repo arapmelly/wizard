@@ -1,0 +1,13 @@
+	<div class="form-group">
+
+      <label>{label}</label>
+      <select ng-model="{model}.{field}" class="form-control">
+      <option value="{{{model}.{field}}}" selected="selected">{{{model}.{field}}}</option>
+      <option ng-repeat="{label} in {label}s" value="{{{label}.id}}">{{{label}.name}}</option>
+      </select>
+      
+    </div>
+
+
+
+    

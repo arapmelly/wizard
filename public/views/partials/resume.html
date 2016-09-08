@@ -1,0 +1,446 @@
+  
+
+    <div class="wrapper " ng-controller="resumeController">
+
+
+    <div class="alert alert-success" ng-show="showSuccessAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+   <strong>Done!</strong> {{successTextAlert}}
+ </div>
+
+
+ 
+
+
+      <div class="panel panel-default">
+        
+        <div class="panel-heading">
+           
+            <button type="button" class="btn btn-success btn-addon" ng-click="createResume()">
+  <i class="glyphicon glyphicon-plus"></i> New Resume
+</button>
+
+        </div>
+        
+        <div class="panel-body">
+
+             <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-2x fa-pulse"></span></p>
+
+             <table class="table table-bordered table-hover table-condensed table-striped table-responsive">
+                
+                <thead>
+                  <th>#</th>
+                  <!-- Add heads -->
+<th>fullnames</th>
+
+<th>email</th>
+
+<th>phone</th>
+
+<th>address</th>
+
+<th>level</th>
+
+<th>career</th>
+
+
+
+                  
+                  <th></th>
+                </thead>
+
+                <tbody>
+                  <tr ng-repeat="resume in resumes">
+
+                    <td>{{$index+1}}</td>
+                   <!-- Add fields -->
+<td>{{ resume.fullnames }}</td>
+
+<td>{{ resume.email }}</td>
+
+<td>{{ resume.phone }}</td>
+
+<td>{{ resume.address }}</td>
+
+<td ng-repeat="level in levels" ng-show="level.id == resume.level_id">{{ level.name }}</td>
+
+<td ng-repeat="career in careers" ng-show="career.id == resume.career_id">{{ career.name }}</td>
+
+
+
+                   
+                    <td>
+                      
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-sm  btn-addon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-th"></i> Action <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu">
+                          
+                          <li><a href="#resumeeditor/{{resume.id}}" > <i class="fa fa-th"></i> Manage</a> </li>
+                           <li><a href="#download/{{resume.id}}" > <i class="fa fa-download"></i> Download</a> </li>
+                          <li><a href="" ng-click="deleteResume(resume.id)"> <i class="fa fa-trash"></i> Remove</a> </li>
+                        </ul>
+              
+                    </div>
+
+
+                    </td>
+                    
+                  </tr>
+                </tbody>
+             </table>
+
+        </div>
+      </div>
+      
+
+
+    </div>
+
+
+
+
+<div class="row" >
+
+
+
+
+
+<script type="text/ng-template" id="editResume.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Update Resume </h4>
+        </div>
+
+      <form ng-submit="updateResume()" class="form-horizontal">
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+          <div class="col-xs-1 col-md-1 col-lg-1"> </div>
+        <div class="col-xs-10 col-md-10 col-lg-10">
+        
+        <div class="alert alert-warning" ng-show="showErrorAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
+   <ul ng-repeat="error in errorTextAlert">
+   <li><strong>Error!</strong> {{error}}</li>
+   </ul>
+ </div>
+    
+    <input type="hidden" ng-model="resume.id" />
+
+    <!-- Add update fields -->
+	<div class="form-group">
+
+      <label>Fullnames</label>
+      <input type="text" class="form-control" ng-model="resume.fullnames"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Email</label>
+      <input type="email" class="form-control" ng-model="resume.email"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Phone</label>
+      <input type="text" class="form-control" ng-model="resume.phone"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Address</label>
+      <textarea ng-model="resume.address" class="form-control"></textarea>
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Level_id</label>
+      <select ng-model="resume.level_id" class="form-control">
+      <option value="{{resume.level_id}}" selected="selected">{{resume.level_id}}</option>
+      <option ng-repeat="Level_id in Level_ids" value="{{Level_id.id}}">{{Level_id.name}}</option>
+      </select>
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Career_id</label>
+      <select ng-model="resume.career_id" class="form-control">
+      <option value="{{resume.career_id}}" selected="selected">{{resume.career_id}}</option>
+      <option ng-repeat="Career_id in Career_ids" value="{{Career_id.id}}">{{Career_id.name}}</option>
+      </select>
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Template_id</label>
+      <select ng-model="resume.template_id" class="form-control">
+      <option value="{{resume.template_id}}" selected="selected">{{resume.template_id}}</option>
+      <option ng-repeat="Template_id in Template_ids" value="{{Template_id.id}}">{{Template_id.name}}</option>
+      </select>
+      
+    </div>
+
+
+
+    
+
+
+    
+
+
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+        <button class="btn btn-success btn-addon pull-right" type="submit" > <i class="fa fa-fw fa-save"></i> Save</button>
+        
+      </div>
+
+    </form>
+  </div>
+
+</script>
+
+
+
+
+<script type="text/ng-template" id="createResume.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Create Resume </h4>
+        </div>
+
+      <form ng-submit="submitResume()" class="form-horizontal">
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+         
+        <div class="col-xs-5 col-md-5 col-lg-5">
+        
+    <div class="alert alert-warning" ng-show="showErrorAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
+   <ul ng-repeat="error in errorTextAlert">
+   <li><strong>Error!</strong> {{error}}</li>
+   </ul>
+ </div>
+   
+
+    <!-- Add create fields -->
+	<div class="form-group">
+
+      <label>Fullnames</label>
+      <input type="text" class="form-control" ng-model="resumeData.fullnames"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Email</label>
+      <input type="email" class="form-control" ng-model="resumeData.email"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Phone</label>
+      <input type="text" class="form-control" ng-model="resumeData.phone"  />
+      
+    </div>
+
+
+
+    
+	<div class="form-group">
+
+      <label>Address</label>
+      <textarea ng-model="resumeData.address" class="form-control"></textarea>
+      
+    </div>
+
+ </div>
+ <div class="col-xs-1 col-md-1 col-lg-1"></div>
+ <div class="col-xs-5 col-md-5 col-lg-5">
+
+    
+	<div class="form-group">
+
+      <label>Level</label>
+      <select ng-model="resumeData.level_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="level in levels" value="{{level.id}}">{{level.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+    
+	<div class="form-group">
+
+      <label>Career</label>
+      <select ng-model="resumeData.career_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="career in careers" value="{{career.id}}">{{career.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+    
+	<div class="form-group">
+
+      <label>Template</label>
+      <select ng-model="resumeData.template_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="template in templates" value="{{template.id}}">
+      <img src="assets/themes/PerfectCV.jpg" style="border:1px solid gray;"/>
+      {{template.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+        <button class="btn btn-success btn-addon pull-right" type="submit" > <i class="fa fa-fw fa-save"></i> Save</button>
+        
+      </div>
+
+    </form>
+  </div>
+
+</script>
+
+
+
+
+<script type="text/ng-template" id="deleteConfirm.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Confirm Action </h4>
+        </div>
+
+     
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+          <div class="col-xs-1 col-md-1 col-lg-1"> </div>
+        <div class="col-xs-10 col-md-10 col-lg-10">
+        
+        
+
+    
+  
+
+    
+<h5> Are you sure you want to delete this Resume? </h5>
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+
+        <button class="btn btn-success btn-addon pull-right" type="button" ng-click="deleteResumeOk(id)"> <i class="fa fa-fw fa-save"></i> Ok</button>
+        
+      </div>
+
+   
+  </div>
+
+</script>
+   
+</div>
+
+
+
+
+
+
+
+
+

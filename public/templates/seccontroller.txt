@@ -1,0 +1,228 @@
+angular.module('{model}Ctrl', [])
+
+.controller('{model}Controller', function($scope, $http, $uibModal, $routeParams, {servname}){
+
+	$scope.{model}Data = {};
+
+    
+
+
+    $scope.{model}Data.{model}s = [];
+
+	$scope.{model} = {};
+	$scope.loading = true;
+	$scope.animationsEnabled = true;
+	$scope.successTextAlert = "Some content";
+	$scope.showSuccessAlert = false;
+
+	$scope.errorTextAlert = {};
+	$scope.showErrorAlert = false;
+
+
+
+    $scope.resumeid = $routeParams.resumeId;
+
+
+	//get all 
+	{servname}.get().success(function(data){
+		$scope.{model}s = data;
+		$scope.loading = false;
+	});
+
+
+	$scope.switchBool = function(value) {
+   $scope[value] = !$scope[value];
+};
+
+
+$scope.addSample = function(sample){
+
+
+
+
+
+    $scope.{model}Data.{model}s.push({
+        sample:sample,
+        resumeid:$scope.resumeid,
+        content:sample.content
+    });
+
+
+
+
+
+};
+
+$scope.removeSample = function(item) { 
+  var index = $scope.{model}Data.{model}s.indexOf(item);
+  
+  $scope.{model}Data.{model}s.splice(index, 1);     
+}
+
+
+
+
+
+	$scope.update{servname} = function() {
+      
+      	$scope.loading = true;
+        // use the function we created in our service
+        {servname}.update($scope.{model}).success(function(data) {
+
+        		if(data.success == true){
+        			$scope.successTextAlert = data.notice;
+					$scope.showSuccessAlert = true;
+					$scope.modalInstance.dismiss();
+        		}
+
+        		if(data.success == false){
+        			$scope.errorTextAlert = data.error;
+					$scope.showErrorAlert = true;
+        		}
+                // if successful, we'll need to refresh the comment list
+                {servname}.get().success(function(getData) {
+                        $scope.{model}s = getData;
+                        $scope.loading = false;
+                       
+                    });
+
+               
+
+            })
+            .error(function(data) {
+                console.log(data);
+            });
+    };
+
+
+    $scope.submit{servname} = function() {
+      	 
+      	$scope.loading = true;
+        
+        
+
+            {servname}.save($scope.{model}Data).success(function(data){
+
+
+
+                if(data.success == true){
+                    $scope.successTextAlert = data.notice;
+                    $scope.showSuccessAlert = true;
+                    $scope.objectiveData = {};
+
+                    {servname}.show($scope.resume.id).success(function(data){
+                        $scope.{model}sData = data;
+                        
+                        $scope.loading = false;
+                        
+                    });
+
+                    $scope.modalInstance.dismiss();
+                    
+
+                }
+
+                if(data.success == false){
+                    $scope.errorTextAlert = data.error;
+                    $scope.showErrorAlert = true;
+                    
+                }
+
+                
+
+            });
+
+
+
+       
+
+
+        
+
+        
+
+    };
+
+
+    $scope.delete{servname} = function(id) {
+        $scope.loading = true; 
+
+        $scope.id = id;
+        
+        $scope.modalInstance = $uibModal.open({
+            templateUrl: 'deleteConfirm.html',
+            scope: $scope
+        });
+
+       
+    };
+
+
+
+     $scope.deleteConfirmOk = function(id) {
+        
+
+        // use the function we created in our service
+        {servname}.destroy(id).success(function(data) {
+
+                if(data.success == true){
+                    $scope.successTextAlert = data.notice;
+                    $scope.showSuccessAlert = true;
+                    
+                }
+                // if successful, we'll need to refresh the comment list
+                {servname}.show($scope.resume.id).success(function(data){
+                        $scope.{model}sData = data;
+                        
+                        $scope.loading = false;
+                        $scope.modalInstance.dismiss();
+                        
+                    });
+
+            });
+    };
+	
+
+
+
+	$scope.edit{servname} = function ({model}) {
+		$scope.loading = true; 
+
+    	
+		$scope.{model} = {model};
+
+    	$scope.modalInstance = $uibModal.open({
+    		templateUrl: 'edit{servname}.html',
+    		scope: $scope,
+            size: 'lg'
+		});
+
+		
+	};
+
+
+
+
+
+
+	$scope.create{servname} = function () {
+		$scope.loading = true; 
+
+        
+		
+    	$scope.modalInstance = $uibModal.open({
+    		templateUrl: 'create{servname}.html',
+    		scope: $scope,
+            size: 'lg'
+		});
+
+		
+	};
+
+
+	$scope.cancel = function () {
+		$scope.loading = false;
+    	$scope.modalInstance.dismiss();
+  	};
+
+})

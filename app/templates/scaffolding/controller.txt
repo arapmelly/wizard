@@ -1,0 +1,96 @@
+<?php
+
+class $NAME$ extends \BaseController {
+
+	/**
+	 * Display a listing of $COLLECTION$
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		return Response::json($MODEL$::all());
+
+		
+	}
+
+	
+
+	/**
+	 * Store a newly created $RESOURCE$ in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		$validator = Validator::make($data = Input::all(), $MODEL$::$rules);
+
+		if ($validator->fails())
+		{
+			
+			return Response::json(array('success'=>false, 'error'=>$validator));
+		} else {
+
+			$MODEL$::add($data);
+
+		}
+
+		
+
+		return Response::json(array('success'=>true, 'notice'=>'sucessfully created'));
+	}
+
+	
+
+	/**
+	 * Show the form for editing the specified $RESOURCE$.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		return Response::json($MODEL$::find($id));
+
+		
+	}
+
+	/**
+	 * Update the specified $RESOURCE$ in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update()
+	{
+	
+
+		$validator = Validator::make($data = Input::all(), $MODEL$::$rules);
+
+		if ($validator->fails())
+		{
+			return Response::json(array('success'=>false, 'error'=>$validator));
+
+		} else {
+			$MODEL$::edit($data);
+		}
+
+		return Response::json(array('success'=>true, 'notice'=>'sucessfully updated'));
+
+		
+	}
+
+	/**
+	 * Remove the specified $RESOURCE$ from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$MODEL$::destroy($id);
+
+		return Response::json(array('success'=>true, 'notice'=>'sucessfully deleted'));
+	}
+
+}

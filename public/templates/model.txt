@@ -1,0 +1,40 @@
+<?php
+
+class {servname} extends \Eloquent {
+
+	
+
+	// Don't forget to fill this array
+	protected $fillable = [];
+
+
+	
+
+	
+
+	public static function add($data){
+
+		
+
+		${model} = new {servname};
+		// Add fields
+		
+        
+        ${model}->save();
+
+       
+	}
+
+
+
+	public static function edit($data){
+
+		
+
+		${model} = {servname}::find(array_get($data, 'id'));
+		// Add fields
+		
+        ${model}->update();
+	}
+
+}

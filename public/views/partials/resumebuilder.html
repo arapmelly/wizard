@@ -1,0 +1,170 @@
+  
+
+    <div class="wrapper " ng-controller="editorController">
+
+
+        <div class="alert alert-success" ng-show="showSuccessAlert">
+            <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+            <strong>Done!</strong> {{successTextAlert}}
+        </div>
+
+
+ <!-- menu bar starts here -->
+        <div class="row">
+
+
+          <div class="col-lg-12 col-sm-12 col-md-12">
+            <div >
+            
+            <a href="" class="btn btn-addon btn-default btn-sm pull-right"><i class="fa fa-download"></i> Download</a>
+
+            <div class="dropdown">
+  <button class="btn btn-addon btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <i class="fa fa-file"></i> Preview
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li ng-repeat="template in templates"><a href="" ng-click="preview(template.name)">{{template.name}} Theme</a></li>
+    
+  </ul>
+</div>
+
+            
+          </div>
+            
+
+          </div>
+
+
+        
+        </div> 
+
+        <hr>
+
+
+<!-- editor starts here -->
+        <div class="row">
+
+         
+
+          <!-- sections start here -->
+           <div class="col-lg-2 col-sm-2 col-md-2">
+
+
+            <ul class="nav navbar-default aside">
+              <li class="b-b"> <a href="" ng-click="personal()" class="active">Personal Info</a></li>
+              <li class="b-b"> <a href="" ng-click="objective()">Objective</a></li>
+             <li class="b-b"> <a href="" ng-click="experience()">Work Experience</a></li>
+
+             <li class="b-b"> <a href="" ng-click="education()">Education</a></li>
+
+             <li class="b-b"> <a href="" ng-click="certification()">Certifications</a></li>
+
+             <li class="b-b"> <a href="" ng-click="skill()">Skills</a></li>
+
+             <li class="b-b"> <a href="" ng-click="achievement()">Achievements</a></li>
+
+             <li class="b-b"> <a href="" ng-click="award()">Awards</a></li>
+
+             <li class="b-b"> <a href="" ng-click="publication()">Publications</a></li>
+
+             <li class="b-b"> <a href="" ng-click="reference()">References</a></li>
+
+            </ul>
+
+
+
+          </div>
+
+          <!-- section content start here -->
+          <div class="col-lg-10 col-sm-10 col-md-10">
+
+            <ng-include src="viewmode"> </ng-include>
+
+          </div>
+
+
+        
+        </div> 
+
+      
+      
+
+
+    </div>
+
+
+
+
+    <script type="text/ng-template" id="preview.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Confirm Action </h4>
+        </div>
+
+     
+        <div class="modal-body wrapper" style="max-height:420px; overflow-y:auto;">
+
+
+        <div class="row">  
+         
+          <div class="col-xs-12 col-md-12 col-lg-12 b-b">
+
+              <a href="" class="btn btn-addon btn-default btn-sm " ng-click="email(resumeData)"><i class="fa fa-envelope"></i> Email</a>
+
+            <a href="" class="btn btn-addon btn-default btn-sm "  ng-click="download(resumeData.id)"><i class="fa fa-download"></i> Download</a>
+
+          </div>
+        </div>
+
+        <br>
+            
+         <div class="row" style="border:0.5px solid grey; margin-left:10px; margin-right:10px;">  
+         
+        <div class="col-xs-11 col-md-11 col-lg-11">
+        
+
+
+<ng-include src="thememode"> </ng-include>
+
+
+
+    
+
+
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+
+        <button class="btn btn-success btn-addon pull-right" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Close</button>
+
+       
+        
+      </div>
+
+   
+  </div>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

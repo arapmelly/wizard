@@ -1,0 +1,10 @@
+	<div class="form-group">
+
+      <label>{label}</label>
+      <textarea ng-model="{model}.{field}" class="form-control"></textarea>
+      
+    </div>
+
+
+
+    

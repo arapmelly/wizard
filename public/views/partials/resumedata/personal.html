@@ -1,0 +1,223 @@
+  
+
+    <div class="wrapper " ng-controller="editorController">
+
+
+        <div class="alert alert-success" ng-show="showSuccessAlert">
+            <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+            <strong>Done!</strong> {{successTextAlert}}
+        </div>
+
+
+ <!-- menu bar starts here -->
+        <div class="row">
+
+
+          <div class="col-lg-12 col-sm-12 col-md-12">
+
+            <a href="" class="btn btn-addon btn-default btn-sm pull-right" ng-click="updatePersonal()"><i class="fa fa-edit"></i> Update</a>
+
+            <h5>Personal Info</h5>
+
+          </div>
+
+
+        
+        </div> 
+
+        <hr>
+
+
+<!-- editor starts here -->
+        <div class="row">
+
+
+          <!-- sections start here -->
+           
+
+          <!-- section content start here -->
+          <div class="col-lg-12 col-sm-12 col-md-12">
+
+              <table class="table table-responsive table-condensed table-bordered table-hover table-stripped">
+
+                <tr>
+                  <td><strong>Name</strong></td><td>{{resume.fullnames}}</td>
+                </tr>
+                 <tr>
+                  <td><strong>Phone</strong></td><td>{{resume.phone}}</td>
+                </tr>
+                 <tr>
+                  <td><strong>Email</strong></td><td>{{resume.email}}</td>
+                </tr>
+                 <tr>
+                  <td><strong>Address</strong></td><td>{{resume.address}}</td>
+                </tr>
+
+                 <tr>
+                  <td><strong>Experience Level</strong></td>
+                  <td ng-repeat="level in levels" ng-show="level.id == resume.level_id">{{level.name}}</td>
+                </tr>
+
+                 <tr>
+                  <td><strong>Career Field</strong></td>
+                  <td ng-repeat="career in careers" ng-show="career.id == resume.career_id">{{career.name}}</td>
+                </tr>
+
+              </table>  
+
+
+
+
+          </div>
+
+
+        
+        </div> 
+
+      
+      
+
+
+    </div>
+
+
+
+
+
+    <script type="text/ng-template" id="updatePersonal.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Update Personal Info </h4>
+        </div>
+
+      <form ng-submit="submitPersonal()" class="form-horizontal">
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+         
+        <div class="col-xs-5 col-md-5 col-lg-5">
+        
+    <div class="alert alert-warning" ng-show="showErrorAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
+   <ul ng-repeat="error in errorTextAlert">
+   <li><strong>Error!</strong> {{error}}</li>
+   </ul>
+ </div>
+   
+
+    <!-- Add create fields -->
+  <div class="form-group">
+
+      <label>Fullnames</label>
+      <input type="text" class="form-control" ng-model="resume.fullnames"  />
+      
+    </div>
+
+
+
+    
+  <div class="form-group">
+
+      <label>Email</label>
+      <input type="email" class="form-control" ng-model="resume.email"  />
+      
+    </div>
+
+
+
+    
+  <div class="form-group">
+
+      <label>Phone</label>
+      <input type="text" class="form-control" ng-model="resume.phone"  />
+      
+    </div>
+
+
+
+    
+  <div class="form-group">
+
+      <label>Address</label>
+      <textarea ng-model="resume.address" class="form-control"></textarea>
+      
+    </div>
+
+ </div>
+ <div class="col-xs-1 col-md-1 col-lg-1"></div>
+ <div class="col-xs-5 col-md-5 col-lg-5">
+
+    
+  <div class="form-group">
+
+      <label>Level</label>
+      <select ng-model="resume.level_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="level in levels" value="{{level.id}}">{{level.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+    
+  <div class="form-group">
+
+      <label>Career</label>
+      <select ng-model="resume.career_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="career in careers" value="{{career.id}}">{{career.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+    
+  <div class="form-group">
+
+      <label>Template</label>
+      <select ng-model="resume.template_id"  class="form-control">
+      <option></option>
+      <option ng-repeat="template in templates" value="{{template.id}}">
+      <img src="assets/themes/PerfectCV.jpg" style="border:1px solid gray;"/>
+      {{template.name}}</option>
+      </select>
+      
+      
+    </div>
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+        <button class="btn btn-success btn-addon pull-right" type="submit" > <i class="fa fa-fw fa-save"></i> Save</button>
+        
+      </div>
+
+    </form>
+  </div>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

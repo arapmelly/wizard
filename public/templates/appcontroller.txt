@@ -1,0 +1,114 @@
+<?php
+
+class {servname}sController extends \BaseController {
+
+	/**
+	 * Display a listing of all
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		
+
+		
+
+		
+		return Response::json({servname}::all());
+
+	}
+
+	
+	/**
+	 * Store a newly created item in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		$data = Input::all();
+
+		$rules = [
+		 //'name' => 'required|unique:taxes,name,'.$id,
+	
+		];
+
+		$validator = Validator::make($data,$rules);
+
+		if ($validator->fails())
+		{
+			return Response::json(array('success'=>'false', 'error'=>$validator->messages()));
+		} else {
+
+
+		${model} = {servname}::add($data);
+		
+
+		return Response::json(array('success' => 'true', 'notice' => '{model} has been successfully created'));
+
+		}
+
+	}
+
+	/**
+	 * Display the specified item.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		return Response::json({servname}::findOrFail($id));
+	}
+
+	
+	/**
+	 * Update the specified item in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update()
+	{
+
+		$data = Input::all();
+		
+		$id = array_get($data, 'id');
+	
+	 	$rules = [
+		 //'name' => 'required|unique:taxes,name,'.$id,
+	
+		];
+
+		$validator = Validator::make($data, $rules);
+
+		if ($validator->fails())
+		{
+			return Response::json(array('success'=>'false', 'error'=>$validator->messages()));
+		}
+
+		{servname}::edit($data);
+
+		 
+
+		return Response::json(array('success' => 'true', 'notice' => '{model} has been successfully updated'));
+	}
+
+	/**
+	 * Remove the specified item from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		${model} = {servname}::find($id);
+
+		{servname}::destroy($id);
+
+		 
+
+		return Response::json(array('success' => 'true', 'notice' => '{model} has been successfully deleted'));
+	}
+
+}

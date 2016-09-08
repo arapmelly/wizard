@@ -1,0 +1,340 @@
+  
+
+    <div class="wrapper " ng-controller="educationController">
+
+
+        <div class="alert alert-success" ng-show="showSuccessAlert">
+            <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+            <strong>Done!</strong> {{successTextAlert}}
+        </div>
+
+
+ <!-- menu bar starts here -->
+        <div class="row">
+
+
+          <div class="col-lg-12 col-sm-12 col-md-12">
+
+            <a href="" class="btn btn-addon btn-default btn-sm pull-right" ng-click="createEducation()"><i class="fa fa-plus"></i> Add new</a>
+
+            <h5>Education</h5>
+
+          </div>
+
+
+        
+        </div> 
+
+        <hr>
+
+
+<!-- editor starts here -->
+        <div class="row">
+
+
+          <!-- sections start here -->
+           
+
+          <!-- section content start here -->
+          <div class="col-lg-12 col-sm-12 col-md-12">
+
+              <ul>
+                <li ng-repeat="education in educationsData" class="b-b">
+                 <p style="line-height: 1.8;">
+
+                  <strong>{{education.institution}}</strong><br>
+        <strong>{{education.course}}</strong><br>
+        From: {{education.start_period}} - To: {{education.end_period}}<br>
+        {{education.remarks}}
+
+                  <span class="pull-right"> 
+                  <a href="" ng-click="editEducation(education)"><i class="fa fa-edit"></i></a> | 
+                  <a href="" ng-click="deleteEducation(education.id)"><i class="fa fa-trash"></i></a> 
+                 </span>
+                 </p>
+                 
+              </li>
+
+            </ul>
+
+
+
+
+          </div>
+
+
+        
+        </div> 
+
+      
+      
+
+
+    </div>
+
+
+
+
+
+
+    <script type="text/ng-template" id="createEducation.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> create educations </h4>
+        </div>
+
+      
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+         
+        <div class="col-xs-6 col-md-6 col-lg-6">
+        
+    <div class="alert alert-warning" ng-show="showErrorAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
+   <ul ng-repeat="error in errorTextAlert">
+   <li><strong>Error!</strong> {{error}}</li>
+   </ul>
+ </div>
+   
+
+   
+
+
+    
+  <div class="form-group">
+
+      <label >Educations</label>
+      <hr>
+       <ul>
+        <li ng-repeat="education in educationData.educations" class="b-b"> 
+        <strong>{{education.institution}}</strong><br>
+        <strong>{{education.course}}</strong><br>
+        From: {{education.start_period}} - To: {{education.end_period}}<br>
+        {{education.remarks}}
+
+        <span class="pull-right"> <a href="" ng-click="removeEducation(education)"> <i class="fa fa-trash"></i> </a></span>
+        </li>
+        
+       </ul>
+      
+      
+    </div>
+
+ </div>
+ <div class="col-xs-1 col-md-1 col-lg-1"></div>
+ <div class="col-xs-5 col-md-5 col-lg-5 b-l">
+
+    
+
+     <div class="panel panel-default">
+        
+       
+        
+        <div class="panel-body">
+
+            <label> Institution </label>
+            <input type="text" ng-model="education.institution" class="form-control" required>
+
+            <label> Course </label>
+            <input type="text" ng-model="education.course" class="form-control" required>
+
+            <label> Star Period </label>
+            <input type="text" ng-model="education.start_period" class="form-control" required>
+
+            <label> End Period</label>
+            <input type="text" ng-model="education.end_period" class="form-control" required>
+
+            <label> Remarks</label>
+            <textarea ng-model="education.remarks" class="form-control" >
+
+            </textarea>
+            <hr>
+
+             <a href="" class="btn btn-success  btn-xs pull-right" ng-click="addEducation(education)"><i class="fa fa-plus"> </i> Add</a>
+
+
+        </div>
+
+
+      </div>
+
+
+  
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+        <button class="btn btn-success btn-addon pull-right" ng-click="submitEducation()" > <i class="fa fa-fw fa-save"></i> Save</button>
+        
+      </div>
+
+   
+  </div>
+
+</script>
+
+
+
+
+
+
+<script type="text/ng-template" id="editEducation.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> update education </h4>
+        </div>
+
+      <form ng-submit="updateEducation()" class="form-horizontal">
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+         
+        <div class="col-xs-11 col-md-11 col-lg-11">
+        
+    <div class="alert alert-warning" ng-show="showErrorAlert">
+   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
+   <ul ng-repeat="error in errorTextAlert">
+   <li><strong>Error!</strong> {{error}}</li>
+   </ul>
+ </div>
+   
+
+   
+
+<input type="hidden" ng-model="education.id" >
+
+            
+            <div class="form-group">
+            <label> Institution </label>
+            <input type="text" ng-model="education.institution" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label> Course </label>
+            <input type="text" ng-model="education.course" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label> Star Period </label>
+            <input type="text" ng-model="education.start_period" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label> End Period</label>
+            <input type="text" ng-model="education.end_period" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label> Remarks</label>
+            <textarea ng-model="education.remarks" class="form-control" >
+
+            </textarea>
+            </div>
+  
+
+      
+      
+      
+   
+
+ </div>
+ 
+ 
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+        <button class="btn btn-success btn-addon pull-right" type="submit" > <i class="fa fa-fw fa-save"></i> Save</button>
+        
+      </div>
+
+    </form>
+  </div>
+
+</script>
+
+
+
+<script type="text/ng-template" id="deleteConfirm.html">
+  
+  <div class="modal-content">
+        <div class="modal-header bg-light lter">
+            <h4 class="modal-title"> <i class="fa fa-fw fa-th"></i> Confirm Action </h4>
+        </div>
+
+     
+        <div class="modal-body wrapper">
+            
+         <div class="row">  
+          <div class="col-xs-1 col-md-1 col-lg-1"> </div>
+        <div class="col-xs-10 col-md-10 col-lg-10">
+        
+        
+
+    
+  
+
+    
+<h5> Are you sure you want to delete this education? </h5>
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+</div>
+</div>
+
+
+
+      </div>
+
+      <div class="modal-footer bg-light lter">
+
+        <button class="btn btn-success btn-addon pull-left" type="button" ng-click="cancel()" > <i class="fa fa-fw fa-close"></i>Cancel</button>
+
+        <button class="btn btn-success btn-addon pull-right" type="button" ng-click="deleteConfirmOk(id)"> <i class="fa fa-fw fa-save"></i> Ok</button>
+        
+      </div>
+
+   
+  </div>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

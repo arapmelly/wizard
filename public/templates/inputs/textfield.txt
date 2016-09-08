@@ -1,0 +1,10 @@
+	<div class="form-group">
+
+      <label>{label}</label>
+      <input type="{type}" class="form-control" ng-model="{model}Data.{field}"  />
+      
+    </div>
+
+
+
+    

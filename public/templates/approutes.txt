@@ -1,0 +1,10 @@
+
+
+// {model} routes
+
+Route::resource('{models}', '{servname}sController');
+Route::get('{models}/show/{id}', '{servname}sController@show');
+Route::get('{models}/destroy/{id}', '{servname}sController@destroy');
+Route::post('{models}/update', '{servname}sController@update');
+
+

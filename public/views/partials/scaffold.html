@@ -1,0 +1,135 @@
+ 
+
+    <div class="wrapper" ng-controller="scaffoldController">
+
+
+    
+
+      <div class="panel panel-default col-lg-12">
+
+
+     <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-2x fa-pulse"></span></p>
+
+        
+        <div class="panel-body">
+
+        {{message}}
+        <hr>
+
+        <form  ng-submit="scaff()" class="form-horizontal">
+
+          <div class="form-group">
+           
+            <div class="col-xs-5 col-md-5 col-lg-5">
+             <label>Model</label>
+            <input type="text" class="form-control " ng-model="scaffold.model" />
+            
+            </div>
+            
+          </div>
+
+
+
+
+          <hr>
+
+          <table class="table table-bordered">
+          <thead>
+            <th>#</th>
+            <th>title</th>
+            <th>type</th>
+            <th>field</th>
+           <!--  <th>attribute</th>
+            <th>table</th>
+            <th>form</th> -->
+            <th></th>
+          </thead>
+            <tr ng-repeat="input in scaffold.inputs">
+                <td>{{$index+1}}</td>
+              <td>{{input.title}}</td>
+              <td>{{input.type}}</td>
+              <td>{{input.field}}</td>
+             <!--  <td>{{input.is_required}}</td>
+              <td>{{input.on_table}}</td>
+              <td>{{input.on_form}}</td> -->
+              <td>
+                <a ng-click="removeInput(input)" class="btn btn-success  btn-sm"><i class="fa fa-fw fa-trash"></i> </a>
+            
+              </td>
+            </tr>
+          </table>
+
+          <hr>
+
+          <table class="table table-condensed form-inline">
+
+          <tr>
+            
+            <td>
+            <label>Title</label>
+              <input type="text" ng-model="scaffold.title" class="form-control">
+            </td>
+            <td>
+            <label>Type</label>
+              <select class="form-control" ng-model="scaffold.type">
+                <option value="text">text</option>
+                <option value="email">email</option>
+                <option value="password">password</option>
+                <option value="hidden">hidden</option>
+                <option value="select">Select</option>
+                <option value="textarea">Textarea</option>
+              </select>
+            </td>
+
+            <td>
+            <label>Field</label>
+              <input type="text" ng-model="scaffold.field" class="form-control">
+            </td>
+
+            <!-- <td>
+           
+              <input type="checkbox" ng-model="scaffold.required" value="1" > Required
+            </td>
+
+            <td>
+           
+              <input type="checkbox" ng-model="scaffold.table" value="1" > Table
+            </td>
+
+            <td>
+           
+              <input type="checkbox" ng-model="scaffold.form" value="1" > Form
+            </td> -->
+
+            <td class="b-r">
+              <a ng-click="addInput()" class="btn btn-success btn-addon  btn-sm"><i class="fa fa-fw fa-plus"></i> Add input</a>
+            </td>
+
+          </tr>
+            
+          </table>
+
+
+          <div class="form-group">
+            <button class="btn  btn-success" type="submit">Scaffold</button>
+            
+          </div>
+
+          
+        </form>
+        
+        </div>
+      </div>
+      
+
+
+    </div>
+
+
+
+
+
+
+
+
+
