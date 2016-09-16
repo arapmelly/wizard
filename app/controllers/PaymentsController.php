@@ -153,12 +153,12 @@ return View::make('payment', compact('iframe_src'));
 
 
 
-	public function payment(){
+	public function redirect(){
 
 
 
 		include_once(app_path().'/pesapal/oauth.php');
-		
+
 $consumer_key="jKW9hoDxENk5EMfhT0GzlyJKSJg1g2AE";//Register a merchant account on
                    //demo.pesapal.com and use the merchant key for testing.
                    //When you are ready to go live make sure you change the key to the live account
