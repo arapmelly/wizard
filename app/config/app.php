@@ -125,7 +125,6 @@ return array(
 		'Zizaco\Confide\ServiceProvider',
 		'Barryvdh\Snappy\ServiceProvider',
 		'Anouar\Paypalpayment\PaypalpaymentServiceProvider',
-		'Arapmelly\Pesapal\PesapalServiceProvider',
 
 	),
 

@@ -41,7 +41,7 @@ var app = angular.module('app',
   ]);
 
 
-app.constant('ENDPOINT_URI', 'http://localhost/laracore/public');
+app.constant('ENDPOINT_URI', 'http://41.209.43.57/wizard/public');
 
 
 
