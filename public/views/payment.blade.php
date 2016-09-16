@@ -6,7 +6,7 @@
 
   <body ng-app="app">
 
-    @include('includes.navbar')
+    @include('includes.client')
 
     
     <div class="container content none" id="none" >

@@ -8,7 +8,7 @@
 		
 	</div>
 	<div class="col-sm-6">
-		<h2><i class='fa fa-user'></i> Signup</h2>
+		<h2><i class='fa fa-user'></i> Create Account</h2>
 
 
 	<form action="{{URL::to('users')}}" class='form' method="post" accept-charset="utf-8">
@@ -22,10 +22,10 @@
 <input type="password" name="password_confirmation" value="" placeholder='Confirm Password' />
 <label for="password">Confirm Password</label>
 
-<input type="submit" name="login" value="Signup" class='btn btn-lg btn-success' />
+<input type="submit" name="login" value="Create Account" class='btn btn-lg btn-success' />
 
 </form>
-<div style='margin-top:15px;'> signed up? <a href="{{URL::to('/')}}">Login</a></div>	
+<div style='margin-top:15px;'> Already signed up? <a href="{{URL::to('/')}}">Login here</a></div>	
 
 </div>
 

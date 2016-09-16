@@ -1,10 +1,23 @@
 @extends('layouts.login')
 @section('content')
 
-<div class="row">
-<br><br><br>
-</div>
 
+
+<div class="row"  >
+
+	<div class="col-lg-4">
+
+	</div>
+
+	<div class="col-lg-4">
+
+		<img src="{{asset('/assets/images/cvwizard.png') }}">
+		
+	</div>
+
+</div>
+<hr>
+@if(!Confide::user())
 <div class="row" >
 	<div class="col-sm-1">
 
@@ -47,7 +60,9 @@
 
 
 </div>
+@endif
 
+@if(!Confide::user())
 <div class="row">
 	<div class="col-lg-12 b-b">
 
@@ -60,12 +75,13 @@
 	</div>
 
 	<div class="col-lg-3">
-		<h5>Get Started with Resume Wizard</h5>
+		
 <br>
-		<a href="{{URL::to('users/login')}}" class="btn btn-success btn-lg"> Create a CV now</a>
+		<a href="{{URL::to('users/create')}}" class="btn btn-success btn-lg"> Create Your CV now</a>
 	</div>	
 
 </div>
+@endif
 
 
 @stop

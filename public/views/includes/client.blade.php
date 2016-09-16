@@ -17,10 +17,13 @@
            
           </ul>
           <ul class="nav navbar-nav navbar-right">
-                 <li class="b-l b-r"><a href="{{URL::to('users/show/'.Confide::user()->id)}}">Profile</a></li>
+                 
+                 <li class="b-l b-r"><a href="">{{Confide::user()->email}}</a></li>
+               
+
             <li class="dropdown active-inverse b-l b-r">
                             
-              <a href="{{URL::to('users/logout')}}" class='strong white'><i class='fa fa-user'></i> Logout</span></a>                <ul class="dropdown-menu" role="menu">
+              <a href="{{URL::to('users/logout')}}" class='strong white'><i class='fa fa-user'></i> Logout </span></a>                <ul class="dropdown-menu" role="menu">
                 </ul>
                         </li>
           </ul>

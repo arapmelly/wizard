@@ -10,6 +10,16 @@
           </button>
           <a href="{{URL::to('/')}}" class='navbar-brand'>CV Wizard</a>        </div>
         <div class="navbar-collapse collapse">
+
+
+          <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+                    
+            <li class="b-l b-r "><a href="{{URL::to('users/login')}}">My Account</a></li>
+           
+           
+         
+        </div>
                     
           
         </div><!--/.nav-collapse -->

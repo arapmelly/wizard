@@ -41,7 +41,7 @@ var app = angular.module('app',
   ]);
 
 
-app.constant('ENDPOINT_URI', 'http://41.209.43.57/wizard/public');
+app.constant('ENDPOINT_URI', 'http://localhost/laracore/public');
 
 
 
@@ -50,10 +50,10 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
        when('/', {
-        templateUrl: 'views/partials/main.html'
+        templateUrl: 'views/partials/resume.html'
       }).
        when('/dashboard', {
-        templateUrl: 'views/partials/main.html'
+        templateUrl: 'views/partials/resume.html'
       }).
        when('/scaffold', {
         templateUrl: 'views/partials/scaffold.html',

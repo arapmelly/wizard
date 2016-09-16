@@ -1,5 +1,5 @@
 <div class="footer">
-  &copy; 2016 <a href="{{URL::to('/')}}" target="_blank">CV Wizard</a>
+  &copy; 2016 <a href="{{URL::to('/')}}" target="_blank">CV Wizard</a> | powered by Softcore Technologies.
  
  
 </div>
